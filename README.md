@@ -1,1 +1,1 @@
-# cot-reporter
+# cot-downloader
