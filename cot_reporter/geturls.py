@@ -4,21 +4,20 @@ from bs4 import BeautifulSoup
 from datetime import date
 from pathlib import Path
 
-# Assign opener agent to not look like a bot
+# Assigning opener agent to not look like a bot
 opener = urllib.request.build_opener()
 opener.addheaders = [("User-Agent", "Mozilla/5.0")]
 urllib.request.install_opener(opener)
 
-# Retrieve website html
+# Retrieving website html
 urllib.request.urlretrieve("http://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalCompressed/index.htm", "data/index.html")
 
-# Open and parse html
+# Parsing html
 with open("data/index.html") as fp:
     soup = BeautifulSoup(fp, "html.parser")
 
-# Define regex function for desired attribute
+# Defining regex function for desired reports
 def targetlink(href):
-    # return href and re.compile(report).search(href)
     return href and re.compile(r"(fut_disagg_txt|fut_fin_txt)").search(href)
 
 # Required to conduct full historic load and then incremental loads week-over-week
@@ -30,8 +29,8 @@ arclist = list(arcpath.glob("*.txt"))
 current_year = str(date.today().year)
 
 if len(arclist) == 0:
-    # Pass in a function to filter and return links
-    # Write links for non-historical files
+    # Passing in a function to filter and return links
+    # Writing links for non-historical files
     with open("data/urls.txt", "w") as file:
         for link in soup.find_all(href=targetlink):
             if "_hist_" not in str(link): # For fut_disagg_text, do not get 2006 - 2016 file
