@@ -1,13 +1,17 @@
+import zipfile
 from datetime import datetime
 from pathlib import Path
 
-# Assign working directory as script location
-cwd = Path(__file__)
+arcpath = Path.cwd() / "data/archive"
+stagepath = Path.cwd() / "data/stage"
+stagelist = list(stagepath.glob("fut_*"))
+wkDTS = datetime.now().strftime("%V")
 
-# Assign source path and set file timestamp
-source = Path("data/f_year.txt")
-dts = datetime.now().strftime("%Y%m%d%H%M%S")
-rename = f"f_year.txt.{dts}"
-
-# Move single file
-target = source.replace(cwd.parent / "archive" / rename)
+# Archiving week-stamped files, moving, and deleting from stage
+for file in stagelist:
+    rename = f"{file.stem}_{wkDTS}"
+    # Open archive in "w" mode and write file to directory to not zip folder structure
+    zipfile.ZipFile(f"{arcpath}/{rename}.zip", mode='w', compression=zipfile.ZIP_DEFLATED).write(file, arcname=rename)
+    # Move file by replacing to archive
+    file_to_rem = Path(file) # Delete file after writing to master data file
+    file_to_rem.unlink()
