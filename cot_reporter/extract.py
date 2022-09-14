@@ -1,20 +1,20 @@
-import os
 import zipfile
-from datetime import datetime
 from pathlib import Path
 
-cwd = Path(__file__).parent
-src_dir = (f"{cwd.parent}\data\downloaded")
-dst_dir = (f"{cwd.parent}\data\stage")
+src = Path.cwd() / "data/downloaded"
+dst = Path.cwd() / "data/stage"
 
-# Extract downloaded files to staging folder and ensure file name uniqueness
-for filename in os.listdir(src_dir):
-    arcpath = os.path.join(src_dir, filename) # Get archive file path
-    if arcpath.endswith(".zip"): # Check extension
-        zip_obj = zipfile.ZipFile(arcpath)
-        zip_obj.extractall(f"{dst_dir}") # Extract archive to destination directory
+# Extracting, uniquefying file names, and deleting from downloaded  
+for f in src.glob('**/*.zip'):
+    z = str(Path(src).joinpath(f))
+    z_name = str(Path(z).stem)
+    if z.endswith(".zip"):
+        zip_obj = zipfile.ZipFile(z)
+        zip_obj.extractall(str(dst))
         zip_obj.close()
-    unarc = os.path.join((f"{dst_dir}\\f_year.txt")) # Get unarchived file path (Need to variabalize for new FinFutYY report
-    dts = datetime.now().strftime("%Y%m%d%H%M%S%f") # Create timestamp for uniqueness
-    renfile = (f"f_year.{dts}.txt") # Create new file name
-    unarc = os.rename(unarc, os.path.join((f"{dst_dir}\\{renfile}"))) # Set unarchived file to new file name
+    zl = zipfile.ZipFile.namelist(zip_obj) # Use namelist to get file name in archive
+    uz = ''.join(map(str, zl)) # Use map function to convert list (of one in this case) to string
+    new_name = "{}_{}".format(z_name, uz) # Use format to try new way of creating file name
+    Path(dst / uz).rename((f"{dst}//{new_name}")) # Use pathlib exclusively to see if I can do without os
+    file_to_remove = Path(f) # Delete file after extraction
+    file_to_remove.unlink()
