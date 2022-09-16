@@ -24,8 +24,8 @@ def targetlink(href):
 # 1) if nothing in archived location, grab all urls;
 # 2) if file in archive, then only url with current year
 
-arcpath = Path("data/archived/")
-arclist = list(arcpath.glob("*.txt"))
+arcpath = Path("data/archive/")
+arclist = list(arcpath.glob("*.zip"))
 current_year = str(date.today().year)
 
 if len(arclist) == 0:
