@@ -1,7 +1,7 @@
 import pandas as pd
 from pathlib import Path
 
-arcpath = Path("data/archived/")
+arcpath = Path("data/archive/")
 stagepath = Path("data/stage/")
 targetpath = Path("data/workbooks/master")
 
@@ -20,10 +20,10 @@ if len(arclist) == 0: # No files previously archived
         # Setting data type to string to not trim leading zeroes on codes
         # Setting header to "None" to avoid header misalignment on report date column
         # Adding header for indices, which will be ignored when writing out file below
-        df = pd.read_csv(file, dtype=str, header=None, skipinitialspace=True)
+        df = pd.read_csv(file, dtype=str, header=None, skipinitialspace=True).drop_duplicates().reset_index(drop=True)
         dfs.append(df)
 
-    df_master = pd.concat(dfs, axis=0).drop_duplicates().reset_index(drop=True) # !! Testing deduping at this step
+    df_master = pd.concat(dfs, axis=0)
     filename = (f"{targetpath}/master_data.csv") # Writing out file if does not exist
     df_master.to_csv(filename, mode="a", index=False, header=False) # Using append mode and ignoring header of indices
 
@@ -32,8 +32,11 @@ else:
         new_data = pd.read_csv(file, dtype=str, header=None, skipinitialspace=True)
 
     for file in targetlist:
-        existing_data = pd.read_csv(file, dtype=str, header=None, skipinitialspace=True)
+        existing_data = pd.read_csv(file, dtype=str, header=None)
 
     # Dropping duplicates recurring in new file and the known duplicates in existing file
-    df_master = pd.concat([new_data, existing_data], ignore_index=True).drop_duplicates().reset_index(drop=True)
-    df_master.to_csv(masterfile, index=False, header=False)
+    df_master = pd.concat([new_data, existing_data], axis=0).drop_duplicates().reset_index(drop=False) #last is working
+    df_master.to_csv(masterfile, index=False, header=False) #!! Now seems to just be dropping header
+    # full_df = pd.concat([new_data, existing_data])
+    # full_df.drop_duplicates()
+    # unique_df = full_df.to_csv(masterfile, index=False, header=None)
