@@ -1,52 +1,39 @@
 import pandas as pd
 from pathlib import Path
 
-arcpath = Path("data/archived/")
+arcpath = Path("data/archive/")
 stagepath = Path("data/stage/")
-targetpath = Path("data/workbooks/master") # !!Removed .cwd
-dmasterfile = (f"{targetpath}/master_data_futd.csv")
-fmasterfile = (f"{targetpath}/master_data_futf.csv")
-arcls = list(arcpath.glob("*.zip"))
-futfls = list(stagepath.glob("fut_fin_*.txt"))
-futdls = list(stagepath.glob("fut_disagg_*.txt"))
-targetls = list(targetpath.glob("master*.csv"))
+targetpath = Path("data/workbooks/master")
+arclist = list(arcpath.glob("*.zip"))
+reports = ["fut_fin","fut_disagg"]
 
-# Need to rewrite this section to use single for loop (iterate over list of lists)
-# !! Need to rewrite to read both existing data and new data, concatenate, and dedupe !!
-# Create master data file for first report
+# Reading multiple files into single master data file initially, then appending net new records after that
+for r in reports:
 
-if len(arcls) == 0:
+    rst = r[0:5]
+    stagelist = list(stagepath.glob(f"{rst}*.txt"))
 
-    dfsf = []
-    for file in futfls:
-        # Set data type to string to not trim leading zeroes on codes
-        # To avoid header misalignment on report date column, set header to "None":
-        # This will add a header for indices, which will be ignored when writing out file below
-        df = pd.read_csv(file, dtype=str, header=None, skipinitialspace=True)
-        dfsf.append(df)
+    if len(arclist) == 0: # No files previously archived
 
-    dff_master = pd.concat(dfsf, axis=0)
-    filename = (f"{targetpath}/master_data_futf.csv") # Will write out file if does not exist
-    dff_master.to_csv(filename, mode="a", index=False, header=False) # Append mode and ignore header of indices
+        dfs = []
+        for file in stagelist:
+            # Setting data type to string to not trim leading zeroes on codes
+            # Setting header to "None" to avoid header misalignment on report date column
+            # Adding header for indices, which will be ignored when writing out file below
+            df = pd.read_csv(file, dtype=str, header=None, skipinitialspace=True).drop_duplicates().reset_index(drop=True)
+            dfs.append(df)
 
-    # Create master data file for second report
-    dfsd = []
-    for file in futdls:
-        df = pd.read_csv(file, dtype=str, header=None, skipinitialspace=True)
-        dfsd.append(df)
+        df_master = pd.concat(dfs, axis=0)
+        masterfile = (f"{targetpath}/master_data_{rst}.csv")
+        df_master.to_csv(masterfile, mode="a", index=False, header=False) # Using append mode and ignoring header of indices
 
-    dfd_master = pd.concat(dfsd, axis=0)
-    filename = (f"{targetpath}/master_data_futd.csv") # Will write out file if does not exist
-    dfd_master.to_csv(filename, mode="a", index=False, header=False) # Append mode and ignore header of indices
+    else:
+        for file in stagelist:
+            new_data = pd.read_csv(file, dtype=str, header=None, skiprows=1, skipinitialspace=True) # Skipping header after historical load
 
-else:
+        masterfile = (f"{targetpath}/master_data_{rst}.csv")
+        existing_data = pd.read_csv(masterfile, dtype=str, header=None)
 
-    for file in futfls:
-        new_data = pd.read_csv(file, dtype=str, header=None, skipinitialspace=True)
-
-    for file in targetls:
-        existing_data = pd.read_csv(file, dtype=str, header=None, skipinitialspace=True)
-
-    # Drop duplicates recurring in new file and known duplicates in existing file
-    dff_master = pd.concat([new_data, existing_data], ignore_index=True).drop_duplicates().reset_index(drop=True)
-    dff_master.to_csv(fmasterfile, index=False, header=False)
+        # Dropping duplicates recurring in new file and the known duplicates in existing file
+        df_master = pd.concat([existing_data, new_data], axis=0).drop_duplicates().reset_index(drop=True) # Ordering concat matters to not lose header
+        df_master.to_csv(masterfile, index=False, header=False)
