@@ -10,7 +10,7 @@ def write_master_data():
     data_dir = Path(cwd / "data")
     arcpath = Path(data_dir / "archive")
     stagepath = Path(data_dir / "stage")
-    targetpath = Path(data_dir / "workbooks/master")
+    targetpath = Path(data_dir / "master")
     arclist = list(arcpath.glob("*.zip"))
     reports = ["fut_fin","fut_disagg"]
 
