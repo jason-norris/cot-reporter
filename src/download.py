@@ -14,7 +14,7 @@ def download_reports():
     urllib.request.install_opener(opener)
 
     # Assigning directory to check before downloading
-    downloads_dir = Path(cwd / "data/downloaded")
+    downloads_dir = Path(cwd / "data/download")
 
     # For the list of urls...
     data_dir = Path(cwd / "data")

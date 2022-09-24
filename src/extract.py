@@ -6,7 +6,7 @@ from pathlib import Path
 def extract_files():
 
     cwd = Path(install_dir / "cot-reporter")
-    src = Path(cwd / "data/downloaded")
+    src = Path(cwd / "data/download")
     dst = Path(cwd / "data/stage")
 
     # Extracting, uniquefying file names, and deleting from downloaded  
