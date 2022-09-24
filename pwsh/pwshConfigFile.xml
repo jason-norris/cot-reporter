@@ -2,9 +2,10 @@
 <configuration>
   <appSettings>
     <!--Vars -->
-    <add key="appDir" value="E:\Users\jason\Documents\github\cot-reporter-dev\cot_reporter\dist"/>
-    <add key="workbookDir" value="E:\Users\jason\Documents\github\cot-reporter-dev\cot-reporter\wip\cot_blees_20220917.xlsx"/>
+    <add key="appDir" value="C:\yourpath\to_src"/>
+    <add key="workbookDir" value="C:\yourpath\to_workbook.xlsx"/>
   </appSettings>
 </configuration>
 <!--Config file for scripts to schedule EXE and refresh workbook-->
+<!--Update directory values with your paths-->
 <!--Thank you to John Collins and gustavwiz: https://stackoverflow.com/a/21505305-->
