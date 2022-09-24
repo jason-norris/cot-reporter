@@ -21,22 +21,35 @@ Use the archive to install COT Reporter in your preferred directory. Once extrac
 
 1. Update **config.ini** with the installation path. Example:
 
-![image](https://cloud.githubusercontent.com/assets/9053854/24495974/fbf2e0cc-1547-11e7-846c-25b5fac7f6b1.png)
+![config_ini](https://user-images.githubusercontent.com/8696078/192114851-a6f95e7a-b4f7-4ec6-9713-b9732421ba1f.png)
+
 
 2. Update the workbook sheet *edit_paths* with the same install path. Example:
-3. **Optional**: Update pswhConfigFile.xml in text editor before running PowerShell
+
+![wb_edit_paths](https://user-images.githubusercontent.com/8696078/192114117-0b79624b-ca31-4abb-b13b-93b2c0ab92cb.png)
+
+3. **Optional**: Update pswhConfigFile.xml in text editor if you plan to run PowerShell
+
+![pwshConfigFile](https://user-images.githubusercontent.com/8696078/192114203-10366b3e-0872-473f-8d95-37cf5eea0080.png)
 
 ## Usage
-
+### Populating workbook
 * There are a couple of ways to run and create consolidated master files for the workbook:
     * Run **cotreporter.exe** (silently). Reports will create two files in /data/master.
     * Use bundled PowerShell script in /pwsh to schedule the task
 
 * Open Excel and click *Refresh All* on *Data* tab to import and query master files
 
-The app will download all historical reports when first executed, but it will only append the report for the current year on each subsequent run. Note that these files are not datestamped, but a week number is appended to the file name when compressed and saved in ./data/archive.
+![wb_refresh_1](https://user-images.githubusercontent.com/8696078/192114676-0cb650ae-4039-45e9-a129-1aeea4da70ed.png)
+
+The app will download all historical reports when first executed, but it will only append the report for the current year on each subsequent run. Note that these files are not datestamped, but a week number is appended to the file name when compressed and saved in /data/archive.
 
 Excel (without a VBA or macro-based solution) may require multiple clicks to completely refresh. However, there is another PowerShell script included that will refresh the workbook in one go.
+
+### Other Notes & Tips
+
+* Do not enable content for workbook until paths to master files set to avoid warnings
+* Once template is set up, save as .xlsx (and update PowerShell config file if used)
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
