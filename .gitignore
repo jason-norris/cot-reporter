@@ -128,10 +128,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# Build files
-build/
-dist/
-
 # Config files
 *.ini
 config.py
