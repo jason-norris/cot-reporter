@@ -2,8 +2,11 @@
 from pathlib import Path
 from configparser import ConfigParser
 
-config = ConfigParser() 
-configFilePath = Path(__file__).parent / "config.ini"
+config = ConfigParser()
+configFilePath = Path.cwd() / "config.ini"
+# This worked when using pyinstaller "onedir", but onefile extracts to temp
+# I believe the error that cannot find config file/SETUP to parse otherwise is because of __file__
+# configFilePath = Path(__file__).parent / "config.ini" 
 config.read(f"{configFilePath}")
 install_dir = Path(config.get("SETUP", "install_dir"))
 
