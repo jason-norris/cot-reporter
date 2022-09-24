@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <appSettings>
+    <!--Vars -->
+    <add key="appDir" value="C:\yourpath\to_src"/>
+    <add key="workbookDir" value="C:\yourpath\to_workbook.xlsx"/>
+  </appSettings>
+</configuration>
+<!--Config file for scripts to schedule EXE and refresh workbook-->
+<!--Update directory values with your paths-->
+<!--Thank you to John Collins and gustavwiz: https://stackoverflow.com/a/21505305-->
