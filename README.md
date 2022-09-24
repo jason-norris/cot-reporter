@@ -34,6 +34,8 @@ The app will download all historical reports when first executed, but it will on
 
 Excel (without a VBA or macro-based solution) may require multiple clicks to completely refresh. However, there is another PowerShell script included that will refresh the workbook in one go.
 
+**IMPORTANT**: Update pswhConfigFile.xml in text editor before running PS scripts!
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
