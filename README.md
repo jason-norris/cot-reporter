@@ -44,7 +44,7 @@ Use the archive to install COT Reporter in your preferred directory. Once extrac
 
 The app will download all historical reports when first executed, but it will only append the report for the current year on each subsequent run. Note that these files are not datestamped, but a week number is appended to the file name when compressed and saved in [/data/archive](/data/archive).
 
-Excel (without a VBA or macro-based solution) may require multiple clicks to completely refresh. However, there is another PowerShell script included that will refresh the workbook in one go.
+Excel (without a VBA or macro-based solution) may require multiple clicks to completely refresh. However, there is another [PowerShell script](/pwsh/refreshExcel.ps1) included that will refresh the workbook in one go.
 
 ### Other Notes & Tips
 
