@@ -19,7 +19,7 @@ Future updates will likely include:
 
 Download as archive or clone COT Reporter in your preferred directory. Once extracted, complete the following steps to obtain reports and populate workbook:
 
-1. Update [**config.ini**](/src/config.ini) with the installation path. Example:
+1. Update [**config.ini**](/build/config.ini) with the installation path. Example:
 
 ![config_ini](https://user-images.githubusercontent.com/8696078/192114851-a6f95e7a-b4f7-4ec6-9713-b9732421ba1f.png)
 
