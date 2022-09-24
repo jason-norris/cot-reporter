@@ -1,4 +1,2 @@
 src/* linguist-documentation=false
 src/* linguist-vendored
-*.py linguist-language=Python
-*.ps1 linguist-language=PowerShell

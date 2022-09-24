@@ -1,6 +1,6 @@
 # Commitment of Traders (COT) Reporter
 
-COT Reporter is a Python application which scrapes weekly reports posted by the Commodity Futures Trading Commission ([CFTC](https://www.cftc.gov/MarketReports/CommitmentsofTraders/index.htm)) and prepares them for presentation in Excel via PowerQuery and Power Pivot. To demonstrate how reports of interest can be automatically extracted, loaded, and transformed for analysis in pivot tables and charts, two reports were targeted in this pilot project - the [Disaggregated Futures](https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalCompressed/index.htm) and [Traders in Financial Futures](https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalCompressed/index.htm). A data model with certain measures was then created to present the [Blees Sentiment Rating](https://bit.ly/3S76uMm) for given markets.
+COT Reporter is a Python application which scrapes weekly reports posted by the Commodity Futures Trading Commission ([CFTC](https://www.cftc.gov/MarketReports/CommitmentsofTraders/index.htm)) and prepares them for presentation in Excel via Power Query and Power Pivot. To demonstrate how reports of interest can be automatically extracted, loaded, and transformed for analysis in pivot tables and charts, two reports were targeted in this pilot project - the [Disaggregated Futures](https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalCompressed/index.htm) and [Traders in Financial Futures](https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalCompressed/index.htm). A data model with certain measures was then created to present the [Blees Sentiment Rating](https://bit.ly/3S76uMm) for given markets.
 
 ## Tech Choices
 Python was selected for its convenient libraries to handle HTML or XML ([Beautiful Soup](https://pypi.org/project/beautifulsoup4/)) and various data structures ([pandas](https://pandas.pydata.org/)), while Excel was chosen for its accessibility as a BI tool. PowerQuery offers the necessary ETL functionality to manage the underlying CSVs created by the app, while PowerPivot acts as a suitable endpoint for the expected consumers of this data.
@@ -17,7 +17,7 @@ Future updates will likely include:
 
 ## Installation
 
-Use the archive to install COT Reporter in your preferred directory. Once extracted, complete the following steps to obtain reports and populate workbook.
+Download as archive or clone COT Reporter in your preferred directory. Once extracted, complete the following steps to obtain reports and populate workbook:
 
 1. Update [**config.ini**](/src/config.ini) with the installation path. Example:
 
