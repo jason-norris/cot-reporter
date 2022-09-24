@@ -48,8 +48,9 @@ Excel (without a VBA or macro-based solution) may require multiple clicks to com
 
 ### Other Notes & Tips
 
-* Do not enable content for workbook until paths to master files set to avoid warnings
+* Do not enable content for workbook until paths to master files set (avoids warnings)
 * Once template is set up, save as .xlsx (and update PowerShell config file if used)
+* Native Excel add-ons may require enablement if prompted
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
