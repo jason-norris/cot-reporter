@@ -134,17 +134,12 @@ config.py
 # HTML
 *.html
 
-# Project documentation
-docs/
-
 # Screenshots
-.png
+*.png
 
 # Test data
-archive/
-downloaded/
-stage/
 tests/
+*0.*.exe
 *.csv
 *.xlsx
 *.zip
