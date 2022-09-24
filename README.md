@@ -20,7 +20,11 @@ Future updates will likely include:
 Use the archive to install COT Reporter in your preferred directory. Once extracted, complete the following steps to obtain reports and populate workbook.
 
 1. Update **config.ini** with the installation path. Example:
+
+![image](https://cloud.githubusercontent.com/assets/9053854/24495974/fbf2e0cc-1547-11e7-846c-25b5fac7f6b1.png)
+
 2. Update the workbook sheet *edit_paths* with the same install path. Example:
+3. **Optional**: Update pswhConfigFile.xml in text editor before running PowerShell
 
 ## Usage
 
@@ -30,11 +34,9 @@ Use the archive to install COT Reporter in your preferred directory. Once extrac
 
 * Open Excel and click *Refresh All* on *Data* tab to import and query master files
 
-The app will download all historical reports when first executed, but it will only append the report for the current year on each subsequent run. Note that these files are not datestamped, but a week number is appended to the file name when compressed and saved in /data/archive.
+The app will download all historical reports when first executed, but it will only append the report for the current year on each subsequent run. Note that these files are not datestamped, but a week number is appended to the file name when compressed and saved in ./data/archive.
 
 Excel (without a VBA or macro-based solution) may require multiple clicks to completely refresh. However, there is another PowerShell script included that will refresh the workbook in one go.
-
-**IMPORTANT**: Update pswhConfigFile.xml in text editor before running PS scripts!
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
