@@ -3,7 +3,7 @@
 COT Reporter is a Python application which scrapes weekly reports posted by the Commodity Futures Trading Commission ([CFTC](https://www.cftc.gov/MarketReports/CommitmentsofTraders/index.htm)) and prepares them for presentation in Excel via Power Query and Power Pivot. To demonstrate how reports of interest can be automatically extracted, loaded, and transformed for analysis in pivot tables and charts, two reports were targeted in this pilot project - the [Disaggregated Futures](https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalCompressed/index.htm) and [Traders in Financial Futures](https://www.cftc.gov/MarketReports/CommitmentsofTraders/HistoricalCompressed/index.htm). A data model with certain measures was then created to present the [Blees Sentiment Rating](https://bit.ly/3S76uMm) for given markets.
 
 ## Tech Choices
-Python was selected for its convenient libraries to handle HTML or XML ([Beautiful Soup](https://pypi.org/project/beautifulsoup4/)) and various data structures ([pandas](https://pandas.pydata.org/)), while Excel was chosen for its accessibility as a BI tool. PowerQuery offers the necessary ETL functionality to manage the underlying CSVs created by the app, while PowerPivot acts as a suitable endpoint for the expected consumers of this data.
+Python was selected for its convenient libraries to handle HTML or XML ([Beautiful Soup](https://pypi.org/project/beautifulsoup4/)) and various data structures ([pandas](https://pandas.pydata.org/)), while Excel was chosen for its accessibility as a BI tool. Power Query offers the necessary ETL functionality to manage the underlying CSVs created by the app, while Power Pivot acts as a suitable endpoint for the expected consumers of this data.
 
 ## Challenges and Future Plans
 The primary challenge was in maintaining modularity for additional reports to be pulled and pushed to the model workbook. Attention was given to portability and dynamic paths overall.
@@ -30,12 +30,12 @@ Download as archive or clone COT Reporter in your preferred directory. Once extr
 
 3. **Optional**: Update [**pswhConfigFile.xml**](/pwsh/pwshConfigFile.xml) in text editor if you plan to run PowerShell
 
-![pwshConfigFile](https://user-images.githubusercontent.com/8696078/192114203-10366b3e-0872-473f-8d95-37cf5eea0080.png)
+![pwshConfigFile](https://user-images.githubusercontent.com/8696078/192145323-88d5ebe7-6271-4cb6-8732-daa2888c4c64.png)
 
 ## Usage
 ### Populating workbook
 * There are a couple of ways to run and create consolidated master files for the workbook:
-    * Run **cotreporter.exe** (silently). Reports will create two files in [/data/master](/data/master).
+    * Run **cotreporter.exe** by double-clicking or from cmd (creates two files in [/data/master](/data/master))
     * Use bundled PowerShell script in [/pwsh](/pwsh) to schedule the task
 
 * Open Excel and click *Refresh All* on *Data* tab to import and query master files
@@ -44,17 +44,17 @@ Download as archive or clone COT Reporter in your preferred directory. Once extr
 
 The app will download all historical reports when first executed, but it will only append the report for the current year on each subsequent run. Note that these files are not datestamped, but a week number is appended to the file name when compressed and saved in [/data/archive](/data/archive).
 
-Excel (without a VBA or macro-based solution) may require multiple clicks to completely refresh. However, there is another [PowerShell script](/pwsh/refreshExcel.ps1) included that will refresh the workbook in one go.
+Excel (without a VBA or macro-based solution) may require multiple clicks to completely import data. However, there is another [PowerShell script](/pwsh/refreshExcel.ps1) included that will refresh the workbook in one go.
 
 ### Other Notes & Tips
 
 * Do not enable content for workbook until paths to master files set (avoids warnings)
-* Once template is set up, save as .xlsx (and update PowerShell config file if used)
+* Once template is configured, save as .xlsx (and update PowerShell config file if used)
 * Native Excel add-ons may require enablement if prompted
 
 ## Disclaimer
 
-If you choose to run this app automatically, please scrape responsibly and schedule it to run once per week when new reports are posted. Likewise, if you modify this code for any other related purpose, please read up on [ethical web scraping](https://www.scrapehero.com/how-to-prevent-getting-blacklisted-while-scraping/) before you do.
+If you choose to schedule this app, please scrape responsibly and run once per week when new reports are posted. Likewise, if you modify this code for any other related purpose, please read more on [ethical web scraping](https://www.scrapehero.com/how-to-prevent-getting-blacklisted-while-scraping/) beforehand.
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
