@@ -1,1 +1,3 @@
 # src/* linguist-vendored=false
+* linguist-vendored
+*.py linguist-vendored=false
