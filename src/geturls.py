@@ -10,8 +10,12 @@ def get_report_links():
 
     cwd = Path(install_dir / "cot-reporter")
     data_dir = Path(cwd / "data")
-    htmlfile = f"{data_dir}/index.html"
-    urlfile = f"{data_dir}/urls.txt"
+    # Issue in release v1.0.0-alpha with deployment to different OS
+    htmlfile = data_dir / "index.html"
+    urlfile = data_dir / "urls.txt"
+    # Commenting out string literal and deploying again
+    # htmlfile = f"{data_dir}/index.html"
+    # urlfile = f"{data_dir}/urls.txt"
 
     # Assigning opener agent to not look like a bot
     opener = urllib.request.build_opener()
